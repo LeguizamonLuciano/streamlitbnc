@@ -35,4 +35,3 @@ def get_timestamp_offset():
     return result
 
 st.text("gg")
-
