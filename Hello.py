@@ -12,6 +12,8 @@ import numpy as np
 import plotly.graph_objects as go
 import os
 
+df = []
+
 st.set_page_config(
     page_title="Interés compuesto | Compound interest",
     page_icon="📈",
