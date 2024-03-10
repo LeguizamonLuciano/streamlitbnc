@@ -1,3 +1,5 @@
+hmac
+hashlib
 requests
 json
 time
