@@ -33,5 +33,5 @@ def get_timestamp_offset():
     response = requests.request("GET", url, headers=headers, data=payload)
     result = json.loads(response.text)["serverTime"]-int(time.time()*1000)
     return result
-st.text("gg")
+st.text(get_timestamp_offset())
 
