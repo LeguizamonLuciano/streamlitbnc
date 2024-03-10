@@ -12,8 +12,6 @@ import numpy as np
 import plotly.graph_objects as go
 import os
 
-df = []
-
 st.set_page_config(
     page_title="Interés compuesto | Compound interest",
     page_icon="📈",
@@ -78,6 +76,8 @@ def get_flexible_savings_balance(asset):
 data = get_flexible_savings_balance('USDT')
 
 rows_data = data['rows']
+
+df = pd.DataFrame(rows_data)
 
 # Display the DataFrame
 df = df[['totalAmount','latestAnnualPercentageRate','yesterdayRealTimeRewards','cumulativeBonusRewards','cumulativeRealTimeRewards','cumulativeTotalRewards']]
