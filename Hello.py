@@ -1,5 +1,5 @@
-#import hmac
-#import hashlib
+import hmac
+import hashlib
 import requests
 import json
 import time
