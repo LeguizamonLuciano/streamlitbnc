@@ -34,5 +34,5 @@ def get_timestamp_offset():
     result = json.loads(response.text)["serverTime"]-int(time.time()*1000)
     return result
 
-st.text(get_timestamp_offset())
+st.text("gg")
 
