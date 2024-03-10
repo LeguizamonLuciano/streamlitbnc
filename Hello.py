@@ -73,73 +73,73 @@ def get_flexible_savings_balance(asset):
     return json.loads(requests.request("GET", url, headers=headers, data=payload).text)
 
 data = get_flexible_savings_balance('USDT')
+st.text(data)
+# # Extracting the rows data
+# max_attempts = 5  # Maximum number of attempts
+# attempt = 1
 
-# Extracting the rows data
-max_attempts = 5  # Maximum number of attempts
-attempt = 1
-
-while attempt <= max_attempts:
-    try:
-        rows_data = data['rows']
-        if rows_data:
-            break
-    except Exception:
-        pass
+# while attempt <= max_attempts:
+#     try:
+#         rows_data = data['rows']
+#         if rows_data:
+#             break
+#     except Exception:
+#         pass
     
-    attempt += 1
+#     attempt += 1
 
-if not rows_data:
-    st.text("Max attempts reached. Unable to get a good response.")
-# Creating DataFrame
-df = pd.DataFrame(rows_data)
+# if not rows_data:
+#     st.text("Max attempts reached. Unable to get a good response.")
+# # Creating DataFrame
+# df = pd.DataFrame(rows_data)
 
-# Display the DataFrame
-df = df[['totalAmount','latestAnnualPercentageRate','yesterdayRealTimeRewards','cumulativeBonusRewards','cumulativeRealTimeRewards','cumulativeTotalRewards']]
+# # Display the DataFrame
+# df = df[['totalAmount','latestAnnualPercentageRate','yesterdayRealTimeRewards','cumulativeBonusRewards','cumulativeRealTimeRewards','cumulativeTotalRewards']]
     
-def main():
-    st.sidebar.header('📈 Parámetros', divider="rainbow")
-    st.sidebar.caption('se estima que el interés se agrega mensualmente al monto')
+# def main():
+#     st.sidebar.header('📈 Parámetros', divider="rainbow")
+#     st.sidebar.caption('se estima que el interés se agrega mensualmente al monto')
 
-    # Define placeholders for initial values
-    principal_input = st.sidebar.number_input('Monto inicial', value=1550)
-    annual_rate_input = st.sidebar.number_input('Interés (%)', value=5)
-    monthly_contribution = st.sidebar.number_input('Contribución mensual', value=100)
-    years = st.sidebar.number_input('Años', value=5)
+#     # Define placeholders for initial values
+#     principal_input = st.sidebar.number_input('Monto inicial', value=1550)
+#     annual_rate_input = st.sidebar.number_input('Interés (%)', value=5)
+#     monthly_contribution = st.sidebar.number_input('Contribución mensual', value=100)
+#     years = st.sidebar.number_input('Años', value=5)
     
-    # Create text input fields for dynamic updates
-    st.sidebar.markdown("<h3 style='text-align: center;'>Monto Binance</h3>", unsafe_allow_html=True)
-    st.sidebar.markdown("<p style='text-align: center;'>" + str(int(float(df['totalAmount']))) + "</p>", unsafe_allow_html=True)
-    principal_text = float(df['totalAmount'])
-    st.sidebar.markdown("<h3 style='text-align: center;'>APY% Binance</h3>", unsafe_allow_html=True)
-    st.sidebar.markdown("<p style='text-align: center;'>" + str(round(float(df['latestAnnualPercentageRate']) * 100, 2)) + "</p>", unsafe_allow_html=True)
-    annual_rate_text = float(df['latestAnnualPercentageRate'])*100
+#     # Create text input fields for dynamic updates
+#     st.sidebar.markdown("<h3 style='text-align: center;'>Monto Binance</h3>", unsafe_allow_html=True)
+#     st.sidebar.markdown("<p style='text-align: center;'>" + str(int(float(df['totalAmount']))) + "</p>", unsafe_allow_html=True)
+#     principal_text = float(df['totalAmount'])
+#     st.sidebar.markdown("<h3 style='text-align: center;'>APY% Binance</h3>", unsafe_allow_html=True)
+#     st.sidebar.markdown("<p style='text-align: center;'>" + str(round(float(df['latestAnnualPercentageRate']) * 100, 2)) + "</p>", unsafe_allow_html=True)
+#     annual_rate_text = float(df['latestAnnualPercentageRate'])*100
         
-    # Create a container to hold the button
-    container = st.container()
+#     # Create a container to hold the button
+#     container = st.container()
     
-    # Center the container
-    with container:
-        col1, col2, col3 = st.sidebar.columns([1, 1, 1])
-        with col2:
-            if st.button("Binance 💰"):
-                # If the text input is not empty, update the respective value
-                if principal_text != "":
-                    principal_input = float(principal_text)
-                if annual_rate_text != "":
-                    annual_rate_input = float(annual_rate_text)
+#     # Center the container
+#     with container:
+#         col1, col2, col3 = st.sidebar.columns([1, 1, 1])
+#         with col2:
+#             if st.button("Binance 💰"):
+#                 # If the text input is not empty, update the respective value
+#                 if principal_text != "":
+#                     principal_input = float(principal_text)
+#                 if annual_rate_text != "":
+#                     annual_rate_input = float(annual_rate_text)
     
-    values = compound_interest(principal_input, annual_rate_input, years, monthly_contribution)
-    years_list = [f'Año {i+1}' for i in range(years)]
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=years_list, y=values, mode='lines+markers', name='Valor acumulado'))
-    fig.update_layout(title='Interés Compuesto',
-                      xaxis_title='Años',
-                      yaxis_title='Valor acumulado',
-                      height=700,
-                      width=1000,
-                      title_x=0.5)
+#     values = compound_interest(principal_input, annual_rate_input, years, monthly_contribution)
+#     years_list = [f'Año {i+1}' for i in range(years)]
+#     fig = go.Figure()
+#     fig.add_trace(go.Scatter(x=years_list, y=values, mode='lines+markers', name='Valor acumulado'))
+#     fig.update_layout(title='Interés Compuesto',
+#                       xaxis_title='Años',
+#                       yaxis_title='Valor acumulado',
+#                       height=700,
+#                       width=1000,
+#                       title_x=0.5)
     
-    st.plotly_chart(fig)
+#     st.plotly_chart(fig)
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
