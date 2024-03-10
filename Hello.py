@@ -23,8 +23,8 @@ alt.themes.enable("dark")
 uri = "https://api.binance.com"
 
 ##  Fill in your Binance API key and Secret keys:
-binance_api_key = "KEY"
-binance_api_secret = "SECRET"
+binance_api_key = st.secrets["KEY"]
+binance_api_secret = st.secrets["SECRET"]
 
 def get_timestamp_offset():
     url = "{}/api/v3/time".format(uri)
