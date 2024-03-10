@@ -75,11 +75,21 @@ def get_flexible_savings_balance(asset):
 data = get_flexible_savings_balance('USDT')
 
 # Extracting the rows data
-try:
-  rows_data = data['rows']
-except:
-  print("An exception occurred")
+max_attempts = 5  # Maximum number of attempts
+attempt = 1
 
+while attempt <= max_attempts:
+    try:
+        rows_data = data['rows']
+        if rows_data:
+            break
+    except Exception:
+        pass
+    
+    attempt += 1
+
+if not rows_data:
+    st.text("Max attempts reached. Unable to get a good response.")
 # Creating DataFrame
 df = pd.DataFrame(rows_data)
 
