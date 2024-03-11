@@ -98,7 +98,7 @@ def main():
     st.sidebar.markdown("<h3 style='text-align: center;'>Monto Binance</h3>", unsafe_allow_html=True)
     st.sidebar.markdown("<p style='text-align: center;'>" + str(int(float(df['totalAmount']))) + "</p>", unsafe_allow_html=True)
     principal_text = float(df['totalAmount'])
-    st.sidebar.markdown("<h3 style='text-align: center;'>APY% Binance</h3>", unsafe_allow_html=True)
+    st.sidebar.markdown("<h3 style='text-align: center;'>APY% Binance (Interés)</h3>", unsafe_allow_html=True)
     st.sidebar.markdown("<p style='text-align: center;'>" + str(round(float(df['latestAnnualPercentageRate']) * 100, 2)) + "</p>", unsafe_allow_html=True)
     annual_rate_text = float(df['latestAnnualPercentageRate'])*100
         
@@ -115,6 +115,8 @@ def main():
                     principal_input = float(principal_text)
                 if annual_rate_text != "":
                     annual_rate_input = float(annual_rate_text)
+    st.sidebar.caption('haciendo click en el botón se reemplazan los valores de Monto inicial e Interés por los de Binance')
+
     
     values = compound_interest(principal_input, annual_rate_input, years, monthly_contribution)
     years_list = [f'Año {i+1}' for i in range(years)]
