@@ -80,7 +80,9 @@ rows_data = data['rows']
 df = pd.DataFrame(rows_data)
 
 # Display the DataFrame
-df = df[['totalAmount','latestAnnualPercentageRate','yesterdayRealTimeRewards','cumulativeBonusRewards','cumulativeRealTimeRewards','cumulativeTotalRewards']]
+#df = df[['totalAmount','latestAnnualPercentageRate','yesterdayRealTimeRewards','cumulativeBonusRewards','cumulativeRealTimeRewards','cumulativeTotalRewards']]
+
+df = df[['totalAmount','latestAnnualPercentageRate']]
     
 def main():
     st.sidebar.header('📈 Parámetros', divider="rainbow")
