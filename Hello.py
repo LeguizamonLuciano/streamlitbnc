@@ -17,7 +17,7 @@ st.set_page_config(
     page_icon="📈",
     layout="wide",
     initial_sidebar_state="expanded",
-    menu_items={"About":""}
+    menu_items={"About":"https://www.linkedin.com/in/luciano-ezequiel-leguizamon/"}
 )
 
 alt.themes.enable("dark")
